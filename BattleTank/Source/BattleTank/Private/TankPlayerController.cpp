@@ -48,7 +48,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	// Get Crosshair pixel position
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
-	FVector2D ScreenLocation(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
+	FVector2D ScreenLocation(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
 	FHitResult HitResult;
 	FCollisionQueryParams LineTraceParams;
 	LineTraceParams.AddIgnoredActor(GetPawn());
