@@ -4,6 +4,7 @@
 #include "TankPlayerController.h"
 #include "GameFramework/PlayerController.h"
 #include "CollisionQueryParams.h"
+#include "Tank.h"
 
 void ATankPlayerController::BeginPlay()
 {
