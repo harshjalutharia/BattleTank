@@ -25,3 +25,8 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 	RightTrack->SetThrottle(-Throw);
 	//TODO prevent Double speed due to dual control use
 }
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *(GetOwner()->GetName()), *(MoveVelocity.ToString()));
+}
