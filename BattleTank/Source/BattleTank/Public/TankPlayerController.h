@@ -20,11 +20,11 @@ public:
 	void BeginPlay() override;
 	void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CrosshairLocation)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = CrosshairLocation)
 	float CrosshairXLocation = 0.5;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CrosshairLocation)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = CrosshairLocation)
 	float CrosshairYLocation = 0.33333;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
 
 private:
