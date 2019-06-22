@@ -28,7 +28,10 @@ public:
 	float LineTraceRange = 1000000;
 
 private:
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;
+	
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
 
 	// Start the tank moving the barrel so the shot would hit where the crosshair intersects the world
