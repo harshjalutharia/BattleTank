@@ -5,27 +5,30 @@
 #include "GameFramework/Actor.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
-#include "Tank.h"
+#include "GameFramework/Pawn.h"
+#include "TankAimingComponent.h"
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	ControlledTank = Cast<ATank>(GetPawn());
-	PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent))
+		UE_LOG(LogTemp, Error, TEXT("AI controller can't find aiming component"));
+	Player = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!ensure(Player))
+		UE_LOG(LogTemp, Error, TEXT("AI controller can't find Player"));
 }
 
 void ATankAIController::Tick(float DeltaTime)
 {
-	if (ensure(PlayerTank))
-	{
-		// Move towards player
-		MoveToActor(PlayerTank, AcceptanceRadius);
+	if (!ensure(AimingComponent) || !ensure(Player)) return;
 
-		// Aim towards player
-		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+	// Move towards player
+	MoveToActor(Player, AcceptanceRadius);
+
+	// Aim towards player
+	AimingComponent->AimAt(Player->GetActorLocation());
 		
-		// TODO Fire when ready
-		ControlledTank->Fire();
-	}
+	// TODO Fire when ready
+	//ControlledTank->Fire();
 }
-

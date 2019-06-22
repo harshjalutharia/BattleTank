@@ -6,7 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
-class ATank;
 class UTankAimingComponent;
 
 /**
@@ -29,16 +28,14 @@ public:
 	float LineTraceRange = 1000000;
 
 protected:
-
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimComRef);
 
 private:
 	
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
+
+	UTankAimingComponent* AimingComponent;
 
 	// Start the tank moving the barrel so the shot would hit where the crosshair intersects the world
 	void AimTowardsCrosshair();
