@@ -5,10 +5,16 @@
 #include "GameFramework/PlayerController.h"
 #include "CollisionQueryParams.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (AimingComponent)
+		FoundAimingComponent(AimingComponent);
+	else
+		UE_LOG(LogTemp, Error, TEXT("Player controller can't find aiming component"));
 }
 
 void ATankPlayerController::Tick(float DeltaTime)

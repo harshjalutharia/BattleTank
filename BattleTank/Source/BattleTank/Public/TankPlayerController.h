@@ -7,6 +7,7 @@
 #include "TankPlayerController.generated.h"
 
 class ATank;
+class UTankAimingComponent;
 
 /**
  * 
@@ -27,10 +28,15 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
 
-private:
+protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(UTankAimingComponent* AimComRef);
+
+private:
 	
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
 
