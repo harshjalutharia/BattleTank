@@ -20,11 +20,13 @@ public:
 	void BeginPlay() override;
 	void Tick(float DeltaTime) override;
 
+protected:
+	//How close AI tank can get to player tank
+	UPROPERTY(EditDefaultsOnly,Category = "Setup")
+	float AcceptanceRadius = 8000;
+
 private:
 	UTankAimingComponent* AimingComponent;
-
-	//How close AI tank can get to player tank
-	float AcceptanceRadius = 3000;
 
 	AActor* Player;
 };

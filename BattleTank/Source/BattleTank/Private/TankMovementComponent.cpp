@@ -2,6 +2,7 @@
 
 
 #include "TankMovementComponent.h"
+#include "GameFramework/Actor.h"
 #include "TankTrack.h"
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
