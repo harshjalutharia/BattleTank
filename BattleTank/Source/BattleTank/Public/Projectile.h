@@ -41,4 +41,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	URadialForceComponent* ExplosionForce = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Destroy")
+	float DestroyDelay = 10.f;
+
+	void OnTimerExpire();
 };
