@@ -6,6 +6,7 @@
 #include "CollisionQueryParams.h"
 #include "GameFramework/Pawn.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 
 void ATankPlayerController::BeginPlay()
 {
@@ -45,7 +46,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	FHitResult HitResult;
 	FCollisionQueryParams LineTraceParams;
 	LineTraceParams.AddIgnoredActor(GetPawn());
-	if (GetHitResultAtScreenPosition(ScreenLocation, ECC_Visibility, LineTraceParams, HitResult))
+	if (GetHitResultAtScreenPosition(ScreenLocation, ECC_Camera, LineTraceParams, HitResult))
 	{
 		if (HitResult.Distance < LineTraceRange)
 			HitLocation = HitResult.ImpactPoint;
@@ -55,4 +56,21 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	}
 	else
 		return false;
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) return;
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPlayerTankDeath);
+	}
+}
+
+void ATankPlayerController::OnPlayerTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Player Tank Dead!"));
+	StartSpectatingOnly();
 }

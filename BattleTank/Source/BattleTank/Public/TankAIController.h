@@ -29,4 +29,9 @@ private:
 	UTankAimingComponent* AimingComponent;
 
 	AActor* Player;
+
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+		void OnPossessedTankDeath();
 };

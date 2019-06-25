@@ -39,4 +39,9 @@ private:
 
 	// Start the tank moving the barrel so the shot would hit where the crosshair intersects the world
 	void AimTowardsCrosshair();
+
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+		void OnPlayerTankDeath();
 };
