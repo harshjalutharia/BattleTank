@@ -73,4 +73,5 @@ void ATankPlayerController::OnPlayerTankDeath()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Player Tank Dead!"));
 	StartSpectatingOnly();
+	AimingComponent->Deactivate();
 }
