@@ -6,6 +6,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "TankTrack.generated.h"
 
+class ASprungWheel;
+
 /**
  * 
  */
@@ -16,23 +18,16 @@ class BATTLETANK_API UTankTrack : public UStaticMeshComponent
 	
 public:
 	UTankTrack();
-	
-	void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
 	void SetThrottle(float Throttle);
 
-	void DriveTrack();
+	void DriveTrack(float CurrentThrottle);
 
 	// Max force per track per newtons
 	UPROPERTY(EditDefaultsOnly)
 	float TrackMaxDrivingForce = 60000000; // 40,000 kg tank + 1g acceleration
 
 private:
-	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
-
-	void ApplySideWaysForce();
-
-	float CurrentThrottle = 0;
+	TArray<ASprungWheel*> GetWheels() const;
 };
